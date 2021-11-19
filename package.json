@@ -1,0 +1,34 @@
+{
+  "name": "redlink-sample-blog-app",
+  "version": "1.0.0",
+  "description": "Sample Blog application usin Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siddhu1997/redlink-sample-blog-app.git"
+  },
+  "keywords": [
+    "blog",
+    "nodejs",
+    "nodemailer",
+    "express"
+  ],
+  "author": "Siddharth S",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siddhu1997/redlink-sample-blog-app/issues"
+  },
+  "homepage": "https://github.com/siddhu1997/redlink-sample-blog-app#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
