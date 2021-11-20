@@ -1,6 +1,7 @@
 const express = require("express")
 const mysql = require("mysql")
 const db = require("./../db-connection").db
+const { notifyAuthors } = require('./../utils/mailer')
 
 const router = new express.Router()
 
@@ -37,6 +38,9 @@ router.get("/posts", (req, res) => {
 // Add a new post by author id
 router.post("/post", (req, res) => {
   const authorId = req.body.blog_author
+  if (!authorId) {
+    res.status(400).send('Missing Author ID!')
+  }
   let checkAuthor = "SELECT COUNT(*) as count from authors where author_id = ?"
   checkAuthor = mysql.format(checkAuthor, authorId)
   db.query(checkAuthor, (err, result) => {
@@ -46,7 +50,7 @@ router.post("/post", (req, res) => {
     if (result[0].count === 0) {
       res.status(404).send("Author not found!")
     } else {
-      if (req.body.blog_title) {
+      if (req.body.blog_title && req.body.blog_description) {
         let insertBlogQuery =
           "INSERT INTO blogs(blog_title, blog_description, blog_author) VALUES (?,?,?)"
         insertBlogQuery = mysql.format(insertBlogQuery, [
@@ -58,9 +62,16 @@ router.post("/post", (req, res) => {
           if (err) {
             res.status(500).send("Uh-oh! Something went wrong at our end!")
           } else {
+            notifyAuthors(
+              authorId,
+              req.body.blog_title,
+              req.body.blog_description
+            );
             res.send("Blog published!")
           }
         })
+      } else {
+        res.status(400).send('Bad request! Title and Description should be present!')
       }
     }
   })
