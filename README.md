@@ -17,6 +17,6 @@
 ``npm start``
 
 ### Good to have
- 1. Run the SQL create and test data scripts provided. Please make dure you add email ids for the test data as well!
- 2. If you want to test the mailer functionality, with Google got to Less Secure apps and allow this option for email address.
+ 1. Run the SQL create and test data scripts provided. Please make sure you've added email ids for the test data as well!
+ 2. If you want to test the mailer functionality, with Google go to Less Secure apps and allow this option for email address.
  Then store your you email, password, service (in this case gmail) in the .env file
