@@ -32,7 +32,7 @@ let notifyAuthors = (authorId, blog_title, blog_description, mailDetails = mailT
       _.forEach(result, function (obj) {
         mailingList.push(obj.email);
       });
-      mailingList.filter((email) => {
+      mailingList = mailingList.filter((email) => {
         validator.validate(email);
       });
         if (mailingList.length) {
